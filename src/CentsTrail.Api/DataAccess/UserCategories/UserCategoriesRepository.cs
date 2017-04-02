@@ -29,12 +29,11 @@ namespace CentsTrail.Api.DataAccess.UserCategories
       parameters.Add("@Limit", request.Limit, dbType: DbType.Decimal, direction: ParameterDirection.Input);
       parameters.Add("@TransactionTypeID", request.TransactionTypeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-      parameters.Add("@UserCategoryID", dbType: DbType.Int64, direction: ParameterDirection.ReturnValue);
+      parameters.Add("@UserCategoryID", dbType: DbType.Int64, direction: ParameterDirection.Output);
 
       await Database.ExecuteAsync(AddUserCategoryStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
 
-      // TODO: Look into why casting to long causes an exception.
-      return parameters.Get<int>("@UserCategoryID");
+      return parameters.Get<long>("@UserCategoryID");
     }
 
     public async Task<bool> DeleteUserCategory(string userId, long userCategoryId)
