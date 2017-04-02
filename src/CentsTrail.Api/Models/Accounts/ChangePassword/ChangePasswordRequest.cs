@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CentsTrail.Api.Models.Accounts.ChangeUserPassword
+namespace CentsTrail.Api.Models.Accounts.ChangePassword
 {
-  public class ChangeUserPasswordRequest
+  public class ChangePasswordRequest
   {
     [Required]
     [DataType(DataType.Password)]

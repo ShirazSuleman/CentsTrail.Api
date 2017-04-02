@@ -3,7 +3,7 @@ using System.Data;
 using Dapper;
 using System.Threading.Tasks;
 using System.Linq;
-using CentsTrail.Api.TransactionTypes.Models;
+using CentsTrail.Api.Models.TransactionTypes;
 
 namespace CentsTrail.Api.DataAccess.TransactionTypes
 {

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CentsTrail.Api.Models.Accounts.RegisterUser
+namespace CentsTrail.Api.Models.Accounts.Register
 {
-  public class RegisterUserRequest
+  public class RegisterRequest
   {
     [Required]
     [Display(Name = "Email")]

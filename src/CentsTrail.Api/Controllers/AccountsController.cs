@@ -1,6 +1,6 @@
 ﻿using CentsTrail.Api.Models;
-using CentsTrail.Api.Models.Accounts.ChangeUserPassword;
-using CentsTrail.Api.Models.Accounts.RegisterUser;
+using CentsTrail.Api.Models.Accounts.ChangePassword;
+using CentsTrail.Api.Models.Accounts.Register;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -46,7 +46,7 @@ namespace CentsTrail.Api.Controllers
     // POST api/Accounts/ChangePassword
     [Route("ChangePassword")]
     [HttpPost]
-    public async Task<IHttpActionResult> ChangePassword(ChangeUserPasswordRequest request)
+    public async Task<IHttpActionResult> ChangePassword(ChangePasswordRequest request)
     {
       if (!ModelState.IsValid)
       {
@@ -67,7 +67,7 @@ namespace CentsTrail.Api.Controllers
     [AllowAnonymous]
     [Route("Register")]
     [HttpPost]
-    public async Task<IHttpActionResult> Register(RegisterUserRequest request)
+    public async Task<IHttpActionResult> Register(RegisterRequest request)
     {
       if (!ModelState.IsValid)
       {

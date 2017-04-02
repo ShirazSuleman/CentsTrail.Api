@@ -1,4 +1,4 @@
-﻿using CentsTrail.Api.TransactionTypes.Models;
+﻿using CentsTrail.Api.Models.TransactionTypes;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
