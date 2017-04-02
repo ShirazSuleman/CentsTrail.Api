@@ -1,6 +1,7 @@
 ﻿using CentsTrail.Api.DataAccess.Currencies;
 using CentsTrail.Api.DataAccess.TransactionTypes;
 using CentsTrail.Api.DataAccess.UserCategories;
+using CentsTrail.Api.DataAccess.UserTransactions;
 using CentsTrail.Api.Helpers;
 using Microsoft.Practices.Unity;
 using System.Data;
@@ -26,6 +27,7 @@ namespace CentsTrail.Api
       container.RegisterType<ITransactionTypesRepository, TransactionTypesRepository>();
       container.RegisterType<ICurrenciesRepository, CurrenciesRepository>();
       container.RegisterType<IUserCategoriesRepository, UserCategoriesRepository>();
+      container.RegisterType<IUserTransactionsRepository, UserTransactionsRepository>();
 
       config.DependencyResolver = new UnityDependencyResolver(container);
     }
