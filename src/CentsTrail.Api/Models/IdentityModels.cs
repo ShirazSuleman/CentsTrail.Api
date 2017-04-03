@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Constants = CentsTrail.Api.Helpers.Constants;
 
 namespace CentsTrail.Api.Models
 {
   public class ApplicationUser : IdentityUser
   {
-    public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
+    public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager,
+      string authenticationType)
     {
       var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
       // Add custom user claims here
@@ -19,7 +21,7 @@ namespace CentsTrail.Api.Models
   public class AuthorizationContext : IdentityDbContext<ApplicationUser>
   {
     public AuthorizationContext()
-            : base(Helpers.Constants.DEFAULT_CONNECTION_STRING, throwIfV1Schema: false)
+      : base(Constants.DefaultConnectionString, false)
     {
     }
 

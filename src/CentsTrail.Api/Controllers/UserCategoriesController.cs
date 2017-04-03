@@ -1,16 +1,16 @@
-﻿using CentsTrail.Api.DataAccess.UserCategories;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
+using CentsTrail.Api.DataAccess.UserCategories;
 using CentsTrail.Api.Models.UserCategories.AddUserCategory;
 using CentsTrail.Api.Models.UserCategories.UpdateUserCategory;
 using Microsoft.AspNet.Identity;
-using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace CentsTrail.Api.Controllers
 {
   [RoutePrefix("api/UserCategories")]
   public class UserCategoriesController : ApiController
   {
-    private IUserCategoriesRepository _repository;
+    private readonly IUserCategoriesRepository _repository;
 
     public UserCategoriesController(IUserCategoriesRepository repository)
     {
@@ -29,7 +29,7 @@ namespace CentsTrail.Api.Controllers
     // GET: api/UserCategories/5
     [HttpGet]
     [Route("{userCategoryId:long}")]
-    public async Task<IHttpActionResult> GetUserCategoryAsync([FromUri]long userCategoryId)
+    public async Task<IHttpActionResult> GetUserCategoryAsync([FromUri] long userCategoryId)
     {
       var result = await _repository.GetUserCategory(User.Identity.GetUserId(), userCategoryId);
 
@@ -45,9 +45,7 @@ namespace CentsTrail.Api.Controllers
     public async Task<IHttpActionResult> AddUserCategoryAsync(AddUserCategoryRequest request)
     {
       if (!ModelState.IsValid)
-      {
         return BadRequest(ModelState);
-      }
 
       var userCategoryId = await _repository.AddUserCategory(User.Identity.GetUserId(), request);
 
@@ -57,12 +55,11 @@ namespace CentsTrail.Api.Controllers
     // PATCH: api/UserCategories/5
     [HttpPatch]
     [Route("{userCategoryId:long}")]
-    public async Task<IHttpActionResult> UpdateUserCategoryAsync([FromUri]long userCategoryId, UpdateUserCategoryRequest request)
+    public async Task<IHttpActionResult> UpdateUserCategoryAsync([FromUri] long userCategoryId,
+      UpdateUserCategoryRequest request)
     {
       if (!ModelState.IsValid)
-      {
         return BadRequest(ModelState);
-      }
 
       var updateSuccessful = await _repository.UpdateUserCategory(User.Identity.GetUserId(), userCategoryId, request);
 
@@ -72,7 +69,7 @@ namespace CentsTrail.Api.Controllers
     // DELETE: api/UserCategories/5
     [HttpDelete]
     [Route("{userCategoryId:long}")]
-    public async Task<IHttpActionResult> DeleteUserCategoryAsync([FromUri]long userCategoryId)
+    public async Task<IHttpActionResult> DeleteUserCategoryAsync([FromUri] long userCategoryId)
     {
       var deleteSuccessful = await _repository.DeleteUserCategory(User.Identity.GetUserId(), userCategoryId);
 

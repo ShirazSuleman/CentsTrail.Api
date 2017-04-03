@@ -1,5 +1,5 @@
-﻿using CentsTrail.Api.Attributes;
-using System.Web.Http;
+﻿using System.Web.Http;
+using CentsTrail.Api.Attributes;
 
 namespace CentsTrail.Api
 {

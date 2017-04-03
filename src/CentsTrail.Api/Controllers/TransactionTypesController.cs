@@ -1,13 +1,13 @@
-﻿using CentsTrail.Api.DataAccess.TransactionTypes;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
+using CentsTrail.Api.DataAccess.TransactionTypes;
 
 namespace CentsTrail.Api.Controllers
 {
   [RoutePrefix("api/TransactionTypes")]
   public class TransactionTypesController : ApiController
   {
-    private ITransactionTypesRepository _repository;
+    private readonly ITransactionTypesRepository _repository;
 
     public TransactionTypesController(ITransactionTypesRepository repository)
     {
@@ -26,7 +26,7 @@ namespace CentsTrail.Api.Controllers
     // GET: api/TransactionTypes/5
     [HttpGet]
     [Route("{transactionTypeId:int}")]
-    public async Task<IHttpActionResult> GetTransactionTypeAsync([FromUri]int transactionTypeId)
+    public async Task<IHttpActionResult> GetTransactionTypeAsync([FromUri] int transactionTypeId)
     {
       var result = await _repository.GetTransactionType(transactionTypeId);
 

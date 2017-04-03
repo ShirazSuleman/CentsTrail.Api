@@ -18,6 +18,6 @@ namespace CentsTrail.Api.Models.UserTransactions.AddUserTransaction
 
     [Required(ErrorMessage = "A Transaction date is required")]
     [Display(Name = "Transaction Date")]
-    public DateTime TransactionDate { get; set;}
+    public DateTime TransactionDate { get; set; }
   }
 }

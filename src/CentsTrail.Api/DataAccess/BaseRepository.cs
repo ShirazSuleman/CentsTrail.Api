@@ -6,7 +6,7 @@ namespace CentsTrail.Api.DataAccess
   {
     protected IDbConnection Database;
 
-    public BaseRepository(IDbConnection database)
+    protected BaseRepository(IDbConnection database)
     {
       Database = database;
     }

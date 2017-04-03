@@ -1,14 +1,13 @@
-﻿using CentsTrail.Api.Models;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
+using CentsTrail.Api.Models;
 using CentsTrail.Api.Models.Accounts.ChangePassword;
 using CentsTrail.Api.Models.Accounts.Register;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http;
-using System.Web.Http.Description;
 
 namespace CentsTrail.Api.Controllers
 {
@@ -23,7 +22,7 @@ namespace CentsTrail.Api.Controllers
     }
 
     public AccountsController(ApplicationUserManager userManager,
-        ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+      ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
     {
       UserManager = userManager;
       AccessTokenFormat = accessTokenFormat;
@@ -31,14 +30,8 @@ namespace CentsTrail.Api.Controllers
 
     public ApplicationUserManager UserManager
     {
-      get
-      {
-        return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-      }
-      private set
-      {
-        _userManager = value;
-      }
+      get { return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+      private set { _userManager = value; }
     }
 
     public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
@@ -49,16 +42,13 @@ namespace CentsTrail.Api.Controllers
     public async Task<IHttpActionResult> ChangePassword(ChangePasswordRequest request)
     {
       if (!ModelState.IsValid)
-      {
         return BadRequest(ModelState);
-      }
 
-      var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), request.OldPassword, request.NewPassword);
+      var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), request.OldPassword,
+        request.NewPassword);
 
       if (!result.Succeeded)
-      {
         return GetErrorResult(result);
-      }
 
       return Ok();
     }
@@ -70,18 +60,14 @@ namespace CentsTrail.Api.Controllers
     public async Task<IHttpActionResult> Register(RegisterRequest request)
     {
       if (!ModelState.IsValid)
-      {
         return BadRequest(ModelState);
-      }
 
-      var user = new ApplicationUser() { UserName = request.Email, Email = request.Email };
+      var user = new ApplicationUser {UserName = request.Email, Email = request.Email};
 
       var result = await UserManager.CreateAsync(user, request.Password);
 
       if (!result.Succeeded)
-      {
         return GetErrorResult(result);
-      }
 
       return Ok();
     }
@@ -102,25 +88,16 @@ namespace CentsTrail.Api.Controllers
     private IHttpActionResult GetErrorResult(IdentityResult result)
     {
       if (result == null)
-      {
         return InternalServerError();
-      }
 
       if (!result.Succeeded)
       {
         if (result.Errors != null)
-        {
-          foreach (string error in result.Errors)
-          {
+          foreach (var error in result.Errors)
             ModelState.AddModelError("", error);
-          }
-        }
 
         if (ModelState.IsValid)
-        {
-          // No ModelState errors are available to send, so just return an empty BadRequest.
           return BadRequest();
-        }
 
         return BadRequest(ModelState);
       }

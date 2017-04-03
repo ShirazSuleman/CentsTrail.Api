@@ -1,8 +1,8 @@
-﻿using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json.Serialization;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json.Serialization;
 
 namespace CentsTrail.Api
 {
@@ -19,9 +19,9 @@ namespace CentsTrail.Api
       config.MapHttpAttributeRoutes();
 
       config.Routes.MapHttpRoute(
-          name: "DefaultApi",
-          routeTemplate: "api/{controller}/{id}",
-          defaults: new { id = RouteParameter.Optional }
+        "DefaultApi",
+        "api/{controller}/{id}",
+        new {id = RouteParameter.Optional}
       );
 
       FilterConfig.Register(config);

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using Dapper;
-using CentsTrail.Api.Models.UserCategories.AddUserCategory;
 using CentsTrail.Api.Models.UserCategories;
+using CentsTrail.Api.Models.UserCategories.AddUserCategory;
 using CentsTrail.Api.Models.UserCategories.UpdateUserCategory;
+using Dapper;
 
 namespace CentsTrail.Api.DataAccess.UserCategories
 {
@@ -23,11 +23,11 @@ namespace CentsTrail.Api.DataAccess.UserCategories
     {
       var parameters = new DynamicParameters();
 
-      parameters.Add("@UserID", userId, dbType: DbType.String, direction: ParameterDirection.Input);
+      parameters.Add("@UserID", userId, DbType.String, ParameterDirection.Input);
 
-      parameters.Add("@Name", request.Name, dbType: DbType.String, direction: ParameterDirection.Input);
-      parameters.Add("@Limit", request.Limit, dbType: DbType.Decimal, direction: ParameterDirection.Input);
-      parameters.Add("@TransactionTypeID", request.TransactionTypeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+      parameters.Add("@Name", request.Name, DbType.String, ParameterDirection.Input);
+      parameters.Add("@Limit", request.Limit, DbType.Decimal, ParameterDirection.Input);
+      parameters.Add("@TransactionTypeID", request.TransactionTypeId, DbType.Int32, ParameterDirection.Input);
 
       parameters.Add("@UserCategoryID", dbType: DbType.Int64, direction: ParameterDirection.Output);
 
@@ -40,10 +40,11 @@ namespace CentsTrail.Api.DataAccess.UserCategories
     {
       var parameters = new DynamicParameters();
 
-      parameters.Add("@UserID", userId, dbType: DbType.String, direction: ParameterDirection.Input);
-      parameters.Add("@UserCategoryID", userCategoryId, dbType: DbType.Int64, direction: ParameterDirection.Input);
+      parameters.Add("@UserID", userId, DbType.String, ParameterDirection.Input);
+      parameters.Add("@UserCategoryID", userCategoryId, DbType.Int64, ParameterDirection.Input);
 
-      var rowsAffected = await Database.ExecuteAsync(DeleteUserCategoryStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
+      var rowsAffected = await Database.ExecuteAsync(DeleteUserCategoryStoredProcedure, parameters,
+        commandType: CommandType.StoredProcedure);
 
       return rowsAffected == 1;
     }
@@ -52,33 +53,36 @@ namespace CentsTrail.Api.DataAccess.UserCategories
     {
       var parameters = new DynamicParameters();
 
-      parameters.Add("@UserID", userId, dbType: DbType.String, direction: ParameterDirection.Input);
+      parameters.Add("@UserID", userId, DbType.String, ParameterDirection.Input);
 
-      return await Database.QueryAsync<UserCategory>(GetUserCategoryStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
+      return await Database.QueryAsync<UserCategory>(GetUserCategoryStoredProcedure, parameters,
+        commandType: CommandType.StoredProcedure);
     }
 
     public async Task<UserCategory> GetUserCategory(string userId, long userCategoryId)
     {
       var parameters = new DynamicParameters();
 
-      parameters.Add("@UserID", userId, dbType: DbType.String, direction: ParameterDirection.Input);
-      parameters.Add("@UserCategoryID", userCategoryId, dbType: DbType.Int64, direction: ParameterDirection.Input);
+      parameters.Add("@UserID", userId, DbType.String, ParameterDirection.Input);
+      parameters.Add("@UserCategoryID", userCategoryId, DbType.Int64, ParameterDirection.Input);
 
-      return await Database.QueryFirstOrDefaultAsync<UserCategory>(GetUserCategoryStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
+      return await Database.QueryFirstOrDefaultAsync<UserCategory>(GetUserCategoryStoredProcedure, parameters,
+        commandType: CommandType.StoredProcedure);
     }
 
     public async Task<bool> UpdateUserCategory(string userId, long userCategoryId, UpdateUserCategoryRequest request)
     {
       var parameters = new DynamicParameters();
 
-      parameters.Add("@UserID", userId, dbType: DbType.String, direction: ParameterDirection.Input);
+      parameters.Add("@UserID", userId, DbType.String, ParameterDirection.Input);
 
-      parameters.Add("@UserCategoryID", userCategoryId, dbType: DbType.Int64, direction: ParameterDirection.Input);
-      parameters.Add("@Name", request.Name, dbType: DbType.String, direction: ParameterDirection.Input);
-      parameters.Add("@Limit", request.Limit, dbType: DbType.Decimal, direction: ParameterDirection.Input);
-      parameters.Add("@TransactionTypeID", request.TransactionTypeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+      parameters.Add("@UserCategoryID", userCategoryId, DbType.Int64, ParameterDirection.Input);
+      parameters.Add("@Name", request.Name, DbType.String, ParameterDirection.Input);
+      parameters.Add("@Limit", request.Limit, DbType.Decimal, ParameterDirection.Input);
+      parameters.Add("@TransactionTypeID", request.TransactionTypeId, DbType.Int32, ParameterDirection.Input);
 
-      var rowsAffected = await Database.ExecuteAsync(UpdateUserCategoryStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
+      var rowsAffected = await Database.ExecuteAsync(UpdateUserCategoryStoredProcedure, parameters,
+        commandType: CommandType.StoredProcedure);
 
       return rowsAffected == 1;
     }

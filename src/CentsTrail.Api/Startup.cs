@@ -1,9 +1,10 @@
-﻿using Microsoft.Owin;
+﻿using System.Web.Http;
+using CentsTrail.Api;
+using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Owin;
-using System.Web.Http;
 
-[assembly: OwinStartup(typeof(CentsTrail.Api.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
 namespace CentsTrail.Api
 {
