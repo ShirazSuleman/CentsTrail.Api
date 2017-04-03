@@ -20,6 +20,7 @@ namespace CentsTrail.Api
       app.UseCors(CorsOptions.AllowAll);
 
       app.UseWebApi(config);
+      app.UseWelcomePage();
     }
   }
 }

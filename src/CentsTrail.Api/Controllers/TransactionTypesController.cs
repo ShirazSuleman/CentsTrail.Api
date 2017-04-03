@@ -4,7 +4,7 @@ using System.Web.Http;
 
 namespace CentsTrail.Api.Controllers
 {
-  [RoutePrefix("api/TransactionTypes")]
+  [RoutePrefix("TransactionTypes")]
   public class TransactionTypesController : ApiController
   {
     private ITransactionTypesRepository _repository;
@@ -14,7 +14,7 @@ namespace CentsTrail.Api.Controllers
       _repository = repository;
     }
 
-    // GET: api/TransactionTypes
+    // GET: TransactionTypes
     [HttpGet]
     [Route("")]
     public async Task<IHttpActionResult> GetTransactionTypesAsync()
@@ -23,7 +23,7 @@ namespace CentsTrail.Api.Controllers
       return Ok(result);
     }
 
-    // GET: api/TransactionTypes/5
+    // GET: TransactionTypes/5
     [HttpGet]
     [Route("{transactionTypeId:int}")]
     public async Task<IHttpActionResult> GetTransactionTypeAsync([FromUri]int transactionTypeId)

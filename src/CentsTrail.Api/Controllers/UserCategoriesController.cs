@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace CentsTrail.Api.Controllers
 {
-  [RoutePrefix("api/UserCategories")]
+  [RoutePrefix("UserCategories")]
   public class UserCategoriesController : ApiController
   {
     private IUserCategoriesRepository _repository;
@@ -17,7 +17,7 @@ namespace CentsTrail.Api.Controllers
       _repository = repository;
     }
 
-    // GET: api/UserCategories
+    // GET: UserCategories
     [HttpGet]
     [Route("")]
     public async Task<IHttpActionResult> GetUserCategoriesAsync()
@@ -26,7 +26,7 @@ namespace CentsTrail.Api.Controllers
       return Ok(result);
     }
 
-    // GET: api/UserCategories/5
+    // GET: UserCategories/5
     [HttpGet]
     [Route("{userCategoryId:long}")]
     public async Task<IHttpActionResult> GetUserCategoryAsync([FromUri]long userCategoryId)
@@ -39,7 +39,7 @@ namespace CentsTrail.Api.Controllers
       return Ok(result);
     }
 
-    // POST: api/UserCategories
+    // POST: UserCategories
     [HttpPost]
     [Route("")]
     public async Task<IHttpActionResult> AddUserCategoryAsync(AddUserCategoryRequest request)
@@ -54,7 +54,7 @@ namespace CentsTrail.Api.Controllers
       return Ok(userCategoryId);
     }
 
-    // PATCH: api/UserCategories/5
+    // PATCH: UserCategories/5
     [HttpPatch]
     [Route("{userCategoryId:long}")]
     public async Task<IHttpActionResult> UpdateUserCategoryAsync([FromUri]long userCategoryId, UpdateUserCategoryRequest request)
@@ -69,7 +69,7 @@ namespace CentsTrail.Api.Controllers
       return Ok(updateSuccessful);
     }
 
-    // DELETE: api/UserCategories/5
+    // DELETE: UserCategories/5
     [HttpDelete]
     [Route("{userCategoryId:long}")]
     public async Task<IHttpActionResult> DeleteUserCategoryAsync([FromUri]long userCategoryId)

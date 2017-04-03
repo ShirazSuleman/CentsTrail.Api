@@ -4,7 +4,7 @@ using System.Web.Http;
 
 namespace CentsTrail.Api.Controllers
 {
-  [RoutePrefix("api/Currencies")]
+  [RoutePrefix("Currencies")]
   public class CurrenciesController : ApiController
   {
     private ICurrenciesRepository _repository;
@@ -14,7 +14,7 @@ namespace CentsTrail.Api.Controllers
       _repository = repository;
     }
 
-    // GET: api/Currencies
+    // GET: Currencies
     [HttpGet]
     [Route("")]
     public async Task<IHttpActionResult> GetCurrenciesAsync()
@@ -23,7 +23,7 @@ namespace CentsTrail.Api.Controllers
       return Ok(result);
     }
 
-    // GET: api/Currencies/5
+    // GET: Currencies/5
     [HttpGet]
     [Route("{currencyId:int}")]
     public async Task<IHttpActionResult> GetCurrencyAsync([FromUri]int currencyId)

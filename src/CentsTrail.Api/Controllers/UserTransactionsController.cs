@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace CentsTrail.Api.Controllers
 {
-  [RoutePrefix("api/UserTransactions")]
+  [RoutePrefix("UserTransactions")]
 
   public class UserTransactionsController : ApiController
   {
@@ -20,7 +20,7 @@ namespace CentsTrail.Api.Controllers
       _repository = repository;
     }
 
-    // POST: api/UserTransactions/search
+    // POST: UserTransactions/search
     [HttpPost]
     [Route("search")]
     public async Task<IHttpActionResult> SearchUserTransactionsAsync(SearchUserTransactionsRequest request)
@@ -29,7 +29,7 @@ namespace CentsTrail.Api.Controllers
       return Ok(result);
     }
 
-    // POST: api/UserTransactions/summary
+    // POST: UserTransactions/summary
     [HttpPost]
     [Route("summary")]
     public async Task<IHttpActionResult> GetUserTransactionSummaryAsync(GetUserTransactionSummaryRequest request)
@@ -38,7 +38,7 @@ namespace CentsTrail.Api.Controllers
       return Ok(result);
     }
 
-    // GET: api/UserTransactions/5
+    // GET: UserTransactions/5
     [HttpGet]
     [Route("{userTransactionId:long}")]
     public async Task<IHttpActionResult> GetUserTransactionAsync([FromUri]long userTransactionId)
@@ -51,7 +51,7 @@ namespace CentsTrail.Api.Controllers
       return Ok(result);
     }
 
-    // POST: api/UserTransactions
+    // POST: UserTransactions
     [HttpPost]
     [Route("")]
     public async Task<IHttpActionResult> AddUserTransactionAsync(AddUserTransactionRequest request)
@@ -66,7 +66,7 @@ namespace CentsTrail.Api.Controllers
       return Ok(userTransactionId);
     }
 
-    // PATCH: api/UserTransactions/5
+    // PATCH: UserTransactions/5
     [HttpPatch]
     [Route("{userTransactionId:long}")]
     public async Task<IHttpActionResult> UpdateUserTransactionAsync([FromUri]long userTransactionId, UpdateUserTransactionRequest request)
@@ -81,7 +81,7 @@ namespace CentsTrail.Api.Controllers
       return Ok(updateSuccessful);
     }
 
-    // DELETE: api/UserTransactions/5
+    // DELETE: UserTransactions/5
     [HttpDelete]
     [Route("{userTransactionId:long}")]
     public async Task<IHttpActionResult> DeleteUserTransactionAsync([FromUri]long userTransactionId)

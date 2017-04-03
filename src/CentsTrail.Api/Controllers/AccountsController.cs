@@ -13,7 +13,7 @@ using System.Web.Http.Description;
 namespace CentsTrail.Api.Controllers
 {
   [ApiExplorerSettings(IgnoreApi = true)]
-  [RoutePrefix("api/Accounts")]
+  [RoutePrefix("Accounts")]
   public class AccountsController : ApiController
   {
     private ApplicationUserManager _userManager;
@@ -43,7 +43,7 @@ namespace CentsTrail.Api.Controllers
 
     public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
-    // POST api/Accounts/ChangePassword
+    // POST Accounts/ChangePassword
     [Route("ChangePassword")]
     [HttpPost]
     public async Task<IHttpActionResult> ChangePassword(ChangePasswordRequest request)
@@ -63,7 +63,7 @@ namespace CentsTrail.Api.Controllers
       return Ok();
     }
 
-    // POST api/Accounts/Register
+    // POST Accounts/Register
     [AllowAnonymous]
     [Route("Register")]
     [HttpPost]

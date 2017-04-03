@@ -1,8 +1,13 @@
-﻿using Microsoft.Owin.Security.OAuth;
+﻿using CentsTrail.Api.Filters;
+using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using Swashbuckle.Application;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using System;
+using System.Xml.XPath;
+using System.Net.Http;
 
 namespace CentsTrail.Api
 {
@@ -20,15 +25,30 @@ namespace CentsTrail.Api
 
       config.Routes.MapHttpRoute(
           name: "DefaultApi",
-          routeTemplate: "api/{controller}/{id}",
+          routeTemplate: "{controller}/{id}",
           defaults: new { id = RouteParameter.Optional }
       );
 
       FilterConfig.Register(config);
       UnityConfig.Register(config);
 
+      config.EnableSwagger(c =>
+                            {
+                              c.SingleApiVersion("v1", "CentsTrail.Api")
+                               .Description("An API for the CentsTrail web application.");
+                              c.OperationFilter<AddAuthorizationHeader>();
+                              c.IncludeXmlComments(GetXmlCommentsPath());
+                              c.DescribeAllEnumsAsStrings();
+                            })
+            .EnableSwaggerUi();
+
       var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
       jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+    }
+
+    private static string GetXmlCommentsPath()
+    {
+      return $@"{AppDomain.CurrentDomain.BaseDirectory}\App_Data\CentsTrail.Api.XML";
     }
   }
 }
