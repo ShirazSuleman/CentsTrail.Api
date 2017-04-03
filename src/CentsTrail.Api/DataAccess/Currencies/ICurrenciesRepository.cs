@@ -1,6 +1,6 @@
-﻿using CentsTrail.Api.Models.Currencies;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using CentsTrail.Api.Models.Currencies;
 
 namespace CentsTrail.Api.DataAccess.Currencies
 {

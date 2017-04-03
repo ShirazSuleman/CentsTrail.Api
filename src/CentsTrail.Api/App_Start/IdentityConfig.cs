@@ -11,11 +11,12 @@ namespace CentsTrail.Api
   public class ApplicationUserManager : UserManager<ApplicationUser>
   {
     public ApplicationUserManager(IUserStore<ApplicationUser> store)
-        : base(store)
+      : base(store)
     {
     }
 
-    public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
+    public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
+      IOwinContext context)
     {
       var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<AuthorizationContext>()));
       // Configure validation logic for usernames
@@ -31,13 +32,12 @@ namespace CentsTrail.Api
         RequireNonLetterOrDigit = true,
         RequireDigit = true,
         RequireLowercase = true,
-        RequireUppercase = true,
+        RequireUppercase = true
       };
       var dataProtectionProvider = options.DataProtectionProvider;
       if (dataProtectionProvider != null)
-      {
-        manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
-      }
+        manager.UserTokenProvider =
+          new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
       return manager;
     }
   }

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using Dapper;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 using CentsTrail.Api.Models.TransactionTypes;
+using Dapper;
 
 namespace CentsTrail.Api.DataAccess.TransactionTypes
 {
@@ -18,15 +18,17 @@ namespace CentsTrail.Api.DataAccess.TransactionTypes
     public async Task<TransactionType> GetTransactionType(int transactionTypeId)
     {
       var parameters = new DynamicParameters();
-      parameters.Add("@TransactionTypeID", transactionTypeId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+      parameters.Add("@TransactionTypeID", transactionTypeId, DbType.Int32, ParameterDirection.Input);
 
-      var result = await Database.QueryAsync<TransactionType>(GetTransactionTypeStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
+      var result = await Database.QueryAsync<TransactionType>(GetTransactionTypeStoredProcedure, parameters,
+        commandType: CommandType.StoredProcedure);
       return result.FirstOrDefault();
     }
 
     public async Task<IEnumerable<TransactionType>> GetTransactionTypes()
     {
-      var result = await Database.QueryAsync<TransactionType>(GetTransactionTypeStoredProcedure, commandType: CommandType.StoredProcedure);
+      var result = await Database.QueryAsync<TransactionType>(GetTransactionTypeStoredProcedure,
+        commandType: CommandType.StoredProcedure);
       return result;
     }
   }

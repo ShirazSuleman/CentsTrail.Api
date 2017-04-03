@@ -1,8 +1,8 @@
-﻿using CentsTrail.Api.Models.UserCategories;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using CentsTrail.Api.Models.UserCategories;
 using CentsTrail.Api.Models.UserCategories.AddUserCategory;
 using CentsTrail.Api.Models.UserCategories.UpdateUserCategory;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CentsTrail.Api.DataAccess.UserCategories
 {

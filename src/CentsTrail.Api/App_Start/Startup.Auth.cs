@@ -1,9 +1,9 @@
-﻿using Owin;
-using System;
+﻿using System;
+using CentsTrail.Api.Models;
 using CentsTrail.Api.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
-using CentsTrail.Api.Models;
+using Owin;
 
 namespace CentsTrail.Api
 {

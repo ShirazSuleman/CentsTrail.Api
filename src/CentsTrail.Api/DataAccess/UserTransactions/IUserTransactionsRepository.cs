@@ -1,10 +1,10 @@
-﻿using CentsTrail.Api.Models.UserTransactions;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using CentsTrail.Api.Models.UserTransactions;
 using CentsTrail.Api.Models.UserTransactions.AddUserTransaction;
 using CentsTrail.Api.Models.UserTransactions.GetUserTransactionSummary;
 using CentsTrail.Api.Models.UserTransactions.SearchUserTransactions;
 using CentsTrail.Api.Models.UserTransactions.UpdateUserTransaction;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CentsTrail.Api.DataAccess.UserTransactions
 {
@@ -16,7 +16,8 @@ namespace CentsTrail.Api.DataAccess.UserTransactions
 
     Task<IEnumerable<UserTransaction>> SearchUserTransactions(string userId, SearchUserTransactionsRequest request);
 
-    Task<IEnumerable<UserTransactionSummary>> GetUserTransactionSummary(string userId, GetUserTransactionSummaryRequest request);
+    Task<IEnumerable<UserTransactionSummary>> GetUserTransactionSummary(string userId,
+      GetUserTransactionSummaryRequest request);
 
     Task<UserTransaction> GetUserTransaction(string userId, long userTransactionId);
 

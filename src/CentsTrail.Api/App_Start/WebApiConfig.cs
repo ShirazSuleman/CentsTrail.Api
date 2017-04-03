@@ -6,8 +6,6 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System;
-using System.Xml.XPath;
-using System.Net.Http;
 
 namespace CentsTrail.Api
 {

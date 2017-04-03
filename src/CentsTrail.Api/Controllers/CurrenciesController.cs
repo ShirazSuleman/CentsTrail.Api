@@ -1,13 +1,13 @@
-﻿using CentsTrail.Api.DataAccess.Currencies;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
+using CentsTrail.Api.DataAccess.Currencies;
 
 namespace CentsTrail.Api.Controllers
 {
   [RoutePrefix("Currencies")]
   public class CurrenciesController : ApiController
   {
-    private ICurrenciesRepository _repository;
+    private readonly ICurrenciesRepository _repository;
 
     public CurrenciesController(ICurrenciesRepository repository)
     {
@@ -26,7 +26,7 @@ namespace CentsTrail.Api.Controllers
     // GET: Currencies/5
     [HttpGet]
     [Route("{currencyId:int}")]
-    public async Task<IHttpActionResult> GetCurrencyAsync([FromUri]int currencyId)
+    public async Task<IHttpActionResult> GetCurrencyAsync([FromUri] int currencyId)
     {
       var result = await _repository.GetCurrency(currencyId);
 

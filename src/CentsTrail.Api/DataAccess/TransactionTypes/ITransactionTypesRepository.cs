@@ -1,6 +1,6 @@
-﻿using CentsTrail.Api.Models.TransactionTypes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using CentsTrail.Api.Models.TransactionTypes;
 
 namespace CentsTrail.Api.DataAccess.TransactionTypes
 {
