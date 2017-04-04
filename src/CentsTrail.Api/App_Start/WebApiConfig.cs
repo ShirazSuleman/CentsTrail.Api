@@ -34,6 +34,7 @@ namespace CentsTrail.Api
                             {
                               c.SingleApiVersion("v1", "CentsTrail.Api")
                                .Description("An API for the CentsTrail web application.");
+                              c.Schemes(new[] { "https" });
                               c.OperationFilter<AddAuthorizationHeader>();
                               c.IncludeXmlComments(GetXmlCommentsPath());
                               c.DescribeAllEnumsAsStrings();
