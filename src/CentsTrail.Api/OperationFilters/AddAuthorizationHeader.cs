@@ -1,10 +1,10 @@
-﻿using Swashbuckle.Swagger;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Swashbuckle.Swagger;
 
-namespace CentsTrail.Api.Filters
+namespace CentsTrail.Api.OperationFilters
 {
   public class AddAuthorizationHeader : IOperationFilter
   {
@@ -25,10 +25,8 @@ namespace CentsTrail.Api.Filters
         type = "string"
       };
 
-      if (apiDescription.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any())
-        parameter.required = false;
-
-      operation.parameters.Add(parameter);
+      if (!apiDescription.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any())
+        operation.parameters.Add(parameter);
     }
   }
 }

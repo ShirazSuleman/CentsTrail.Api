@@ -10,7 +10,6 @@ using Microsoft.AspNet.Identity;
 namespace CentsTrail.Api.Controllers
 {
   [RoutePrefix("UserTransactions")]
-
   public class UserTransactionsController : ApiController
   {
     private readonly IUserTransactionsRepository _repository;
