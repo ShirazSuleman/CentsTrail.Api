@@ -6,7 +6,6 @@ using CentsTrail.Api.Models.Accounts.ChangePassword;
 using CentsTrail.Api.Models.Accounts.Register;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
 
 namespace CentsTrail.Api.Controllers
 {
@@ -19,11 +18,9 @@ namespace CentsTrail.Api.Controllers
     {
     }
 
-    public AccountsController(ApplicationUserManager userManager,
-      ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+    public AccountsController(ApplicationUserManager userManager)
     {
       UserManager = userManager;
-      AccessTokenFormat = accessTokenFormat;
     }
 
     public ApplicationUserManager UserManager
@@ -31,8 +28,6 @@ namespace CentsTrail.Api.Controllers
       get { return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
       private set { _userManager = value; }
     }
-
-    public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
     // POST Accounts/ChangePassword
     [Route("ChangePassword")]

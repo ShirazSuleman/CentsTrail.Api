@@ -1,4 +1,5 @@
-﻿using CentsTrail.Api.DataAccess.Currencies;
+﻿using CentsTrail.Api.Controllers;
+using CentsTrail.Api.DataAccess.Currencies;
 using CentsTrail.Api.DataAccess.TransactionTypes;
 using CentsTrail.Api.DataAccess.UserCategories;
 using CentsTrail.Api.DataAccess.UserTransactions;
@@ -28,6 +29,7 @@ namespace CentsTrail.Api
       container.RegisterType<ICurrenciesRepository, CurrenciesRepository>();
       container.RegisterType<IUserCategoriesRepository, UserCategoriesRepository>();
       container.RegisterType<IUserTransactionsRepository, UserTransactionsRepository>();
+      container.RegisterType<AccountsController>(new InjectionConstructor());
 
       config.DependencyResolver = new UnityDependencyResolver(container);
     }
