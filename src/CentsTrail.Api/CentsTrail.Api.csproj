@@ -25,7 +25,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/d578d850-711e-4e9d-b28d-75be93c5ada7/resourcegroups/CentsTrail/providers/microsoft.insights/components/centstrailapi</ApplicationInsightsResourceId>
-    <ApplicationInsightsAnnotationResourceId>/subscriptions/d578d850-711e-4e9d-b28d-75be93c5ada7/resourcegroups/CentsTrail/providers/microsoft.insights/components/centstrailapi</ApplicationInsightsAnnotationResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/d578d850-711e-4e9d-b28d-75be93c5ada7/resourceGroups/CentsTrail/providers/microsoft.insights/components/centstrailapi</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
