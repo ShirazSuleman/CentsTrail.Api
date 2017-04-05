@@ -27,6 +27,7 @@ namespace CentsTrail.Api
         TokenEndpointPath = new PathString("/Token"),
         Provider = new ApplicationOAuthProvider(PublicClientId),
         AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
+        RefreshTokenProvider = new ApplicationRefreshTokenProvider(),
         AllowInsecureHttp = false
       };
 
