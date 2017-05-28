@@ -1,103 +1,78 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
-using CentsTrail.Api.Models;
-using CentsTrail.Api.Models.Accounts.ChangePassword;
-using CentsTrail.Api.Models.Accounts.Register;
+using CentsTrail.Api.DataAccess.Accounts;
+using CentsTrail.Api.Models.Accounts.AddAccount;
+using CentsTrail.Api.Models.Accounts.UpdateAccount;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace CentsTrail.Api.Controllers
 {
   [RoutePrefix("Accounts")]
   public class AccountsController : ApiController
   {
-    private ApplicationUserManager _userManager;
+    private readonly IAccountsRepository _repository;
 
-    public AccountsController()
+    public AccountsController(IAccountsRepository repository)
     {
+      _repository = repository;
     }
 
-    public AccountsController(ApplicationUserManager userManager)
+    // GET: Accounts
+    [HttpGet]
+    [Route("")]
+    public async Task<IHttpActionResult> GetAccountsAsync()
     {
-      UserManager = userManager;
+      var result = await _repository.GetAccounts(User.Identity.GetUserId());
+      return Ok(result);
     }
 
-    public ApplicationUserManager UserManager
+    // GET: Accounts/5
+    [HttpGet]
+    [Route("{accountId:long}")]
+    public async Task<IHttpActionResult> GetAccountAsync([FromUri] long accountId)
     {
-      get { return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
-      private set { _userManager = value; }
-    }
+      var result = await _repository.GetAccount(User.Identity.GetUserId(), accountId);
 
-    // POST Accounts/ChangePassword
-    [Route("ChangePassword")]
-    [HttpPost]
-    public async Task<IHttpActionResult> ChangePassword(ChangePasswordRequest request)
-    {
-      if (!ModelState.IsValid)
-        return BadRequest(ModelState);
-
-      var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), request.OldPassword,
-        request.NewPassword);
-
-      if (!result.Succeeded)
-        return GetErrorResult(result);
-
-      return Ok();
-    }
-
-    // POST Accounts/Register
-    [AllowAnonymous]
-    [Route("Register")]
-    [HttpPost]
-    public async Task<IHttpActionResult> Register(RegisterRequest request)
-    {
-      if (!ModelState.IsValid)
-        return BadRequest(ModelState);
-
-      var user = new ApplicationUser {UserName = request.Email, Email = request.Email};
-
-      var result = await UserManager.CreateAsync(user, request.Password);
-
-      if (!result.Succeeded)
-        return GetErrorResult(result);
-
-      return Ok();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-      if (disposing && _userManager != null)
-      {
-        _userManager.Dispose();
-        _userManager = null;
-      }
-
-      base.Dispose(disposing);
-    }
-
-    #region Helpers
-
-    private IHttpActionResult GetErrorResult(IdentityResult result)
-    {
       if (result == null)
-        return InternalServerError();
+        return BadRequest();
 
-      if (!result.Succeeded)
-      {
-        if (result.Errors != null)
-          foreach (var error in result.Errors)
-            ModelState.AddModelError("", error);
-
-        if (ModelState.IsValid)
-          return BadRequest();
-
-        return BadRequest(ModelState);
-      }
-
-      return null;
+      return Ok(result);
     }
 
-    #endregion
+    // POST: Accounts
+    [HttpPost]
+    [Route("")]
+    public async Task<IHttpActionResult> AddAccountAsync(AddAccountRequest request)
+    {
+      if (!ModelState.IsValid)
+        return BadRequest(ModelState);
+
+      var accountId = await _repository.AddAccount(User.Identity.GetUserId(), request);
+
+      return Ok(accountId);
+    }
+
+    // PATCH: Accounts/5
+    [HttpPatch]
+    [Route("{accountId:long}")]
+    public async Task<IHttpActionResult> UpdateAccountAsync([FromUri] long accountId, UpdateAccountRequest request)
+    {
+      if (!ModelState.IsValid)
+        return BadRequest(ModelState);
+
+      var updateSuccessful = await _repository.UpdateAccount(User.Identity.GetUserId(), accountId, request);
+
+      return Ok(updateSuccessful);
+    }
+
+    // DELETE: Accounts/5
+    [HttpDelete]
+    [Route("{accountId:long}")]
+    public async Task<IHttpActionResult> DeleteAccountAsync([FromUri] long accountId)
+    {
+      var deleteSuccessful = await _repository.DeleteAccount(User.Identity.GetUserId(), accountId);
+
+      return Ok(deleteSuccessful);
+    }
   }
 }

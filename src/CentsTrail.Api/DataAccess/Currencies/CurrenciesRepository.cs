@@ -25,7 +25,7 @@ namespace CentsTrail.Api.DataAccess.Currencies
     public async Task<Currency> GetCurrency(int currencyId)
     {
       var parameters = new DynamicParameters();
-      parameters.Add("@CurrencyID", currencyId, DbType.Int32, ParameterDirection.Input);
+      parameters.Add("@Id", currencyId, DbType.Int32, ParameterDirection.Input);
 
       var result = await Database.QueryAsync<Currency>(GetCurrencyStoredProcedure, parameters,
         commandType: CommandType.StoredProcedure);

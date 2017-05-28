@@ -2,7 +2,7 @@
 {
   public class Currency
   {
-    public int CurrencyId { get; set; }
+    public int Id { get; set; }
 
     public string Name { get; set; }
 
