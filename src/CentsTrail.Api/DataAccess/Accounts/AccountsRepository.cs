@@ -26,6 +26,7 @@ namespace CentsTrail.Api.DataAccess.Accounts
       parameters.Add("@UserId", userId, DbType.String, ParameterDirection.Input);
 
       parameters.Add("@Name", request.Name, DbType.String, ParameterDirection.Input);
+      parameters.Add("@CurrencyId", request.CurrencyId, DbType.Int32, ParameterDirection.Input);
       parameters.Add("@AccountTypeId", request.AccountTypeId, DbType.Int32, ParameterDirection.Input);
 
       parameters.Add("@Id", dbType: DbType.Int64, direction: ParameterDirection.Output);
@@ -77,6 +78,7 @@ namespace CentsTrail.Api.DataAccess.Accounts
 
       parameters.Add("@Id", accountId, DbType.Int64, ParameterDirection.Input);
       parameters.Add("@Name", request.Name, DbType.String, ParameterDirection.Input);
+      parameters.Add("@CurrencyId", request.CurrencyId, DbType.Int32, ParameterDirection.Input);
       parameters.Add("@AccountTypeId", request.AccountTypeId, DbType.Int32, ParameterDirection.Input);
 
       var rowsAffected = await Database.ExecuteAsync(UpdateAccountStoredProcedure, parameters,

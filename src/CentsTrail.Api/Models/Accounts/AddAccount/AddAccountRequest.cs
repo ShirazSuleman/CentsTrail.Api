@@ -9,6 +9,11 @@ namespace CentsTrail.Api.Models.Accounts.AddAccount
     [Display(Name = "Account name")]
     public string Name { get; set; }
 
+    [Required(ErrorMessage = "A Currency is required")]
+    [Display(Name = "Currency Identifier")]
+    [Range(1, int.MaxValue, ErrorMessage = "{0} must be a value greather than {1}")]
+    public int CurrencyId { get; set; }
+
     [Required(ErrorMessage = "An Account type is required")]
     [Display(Name = "Account Type Identifier")]
     [Range(1, int.MaxValue, ErrorMessage = "{0} must be a value greather than {1}")]

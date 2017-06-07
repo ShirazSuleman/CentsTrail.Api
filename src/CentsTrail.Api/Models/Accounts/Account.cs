@@ -9,6 +9,8 @@ namespace CentsTrail.Api.Models.Accounts
 
     public string Name { get; set; }
 
+    public int CurrencyId { get; set; }
+
     [JsonIgnore]
     public string UserId { get; set; }
 

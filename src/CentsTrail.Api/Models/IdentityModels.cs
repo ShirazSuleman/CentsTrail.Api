@@ -29,7 +29,6 @@ namespace CentsTrail.Api.Models
     {
       return new AuthorizationContext();
     }
-
     protected override void OnModelCreating(DbModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);
