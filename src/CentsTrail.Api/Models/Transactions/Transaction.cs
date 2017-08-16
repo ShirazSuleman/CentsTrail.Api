@@ -20,6 +20,12 @@ namespace CentsTrail.Api.Models.Transactions
 
     public long PeriodId { get; set; }
 
+    public string Account { get; set; }
+
+    public string Category { get; set; }
+
+    public string Period { get; set; }
+
     [JsonIgnore]
     public DateTime DateAdded { get; set; }
 
