@@ -14,10 +14,13 @@ namespace CentsTrail.Api.Models.Transactions
 
     public decimal Amount { get; set; }
 
+    [JsonIgnore]
     public long AccountId { get; set; }
 
+    [JsonIgnore]
     public long CategoryId { get; set; }
 
+    [JsonIgnore]
     public long PeriodId { get; set; }
 
     public string Account { get; set; }
